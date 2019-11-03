@@ -1,7 +1,7 @@
 package juego;
 
 /**
- * Juego Cuatro en Lí­nea
+ * Juego Cuatro en LÃ­Â­nea
  * 
  * Reglas:
  * 
@@ -10,18 +10,17 @@ package juego;
  */
 public class CuatroEnLinea {
 
-	private int filas;
-	private int columnas;
-	private String jugadorRojo;
-	private String jugadorAmarillo;
+	private int filas = 0;
+	private int columnas = 0;
+	private String jugadorRojo = null;
+	private String jugadorAmarillo = null;
 	private Casillero colocarFichas[][];
-	private boolean turnoDeJugadorRojo;
+	private boolean turnoDeJugadorRojo = true;
 	private int[] lugarFicha;
 	
 	
 	public CuatroEnLinea(int filas, int columnas, String jugadorRojo, String jugadorAmarillo){
 		
-		turnoDeJugadorRojo = true;
 		int erroresFilasColumnas[] = new int[2];
 		int erroresNombres[] = new int[2];
 		
@@ -139,7 +138,7 @@ public class CuatroEnLinea {
 
 	public void soltarFicha(int columna){
 
-		if (turnoDeJugadorRojo && columna < colocarFichas.length && columna >= 0){
+		if (turnoDeJugadorRojo && columna <= colocarFichas.length && columna >= 0){
 			
 			for (int i = 0; i < filas && turnoDeJugadorRojo; i++) {
 				
