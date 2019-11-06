@@ -328,7 +328,7 @@ public class CuatroEnLinea {
 							contador = 0;
 						}
 					}
-					if(colocarFichas[fila+i][columna+i] == Casillero.AMARILLO || colocarFichas[fila+i][columna+i] == Casillero.VERDE){
+					if(colocarFichas[fila+i][columna+i] == Casillero.AMARILLO || colocarFichas[fila+i][columna+i] == Casillero.VERDE || colocarFichas[fila+i][columna+i] == Casillero.VACIO){
 						
 						for(int m = 0; m<4; m++){
 							
@@ -358,7 +358,7 @@ public class CuatroEnLinea {
 							contador = 0;
 						}
 					}
-					if(colocarFichas[fila+i][columna+i] == Casillero.ROJO || colocarFichas[fila+i][columna+i] == Casillero.VERDE){
+					if(colocarFichas[fila+i][columna+i] == Casillero.ROJO || colocarFichas[fila+i][columna+i] == Casillero.VERDE || colocarFichas[fila+i][columna+i] == Casillero.VACIO){
 						
 						for(int m = 0; m<4; m++){
 							
@@ -416,7 +416,7 @@ public class CuatroEnLinea {
 						}
 					}
 					
-					if(colocarFichas[fila-i][columna+i] == Casillero.AMARILLO || colocarFichas[fila-i][columna+i] == Casillero.VERDE){
+					if(colocarFichas[fila-i][columna+i] == Casillero.AMARILLO || colocarFichas[fila-i][columna+i] == Casillero.VERDE || colocarFichas[fila-i][columna+i] == Casillero.VACIO){
 						
 						for(int m = 0; m<4; m++){
 							
@@ -456,7 +456,7 @@ public class CuatroEnLinea {
 						}
 					}
 					
-					if(colocarFichas[fila-i][columna+i] == Casillero.ROJO || colocarFichas[fila-i][columna+i] == Casillero.VERDE){
+					if(colocarFichas[fila-i][columna+i] == Casillero.ROJO || colocarFichas[fila-i][columna+i] == Casillero.VERDE || colocarFichas[fila-i][columna+i] == Casillero.VACIO){
 						
 						for(int m = 0; m<4; m++){
 							
@@ -501,7 +501,7 @@ public class CuatroEnLinea {
 						}
 					}
 					
-					if(colocarFichas[fila][columna+i] == Casillero.AMARILLO || colocarFichas[fila][columna+i] == Casillero.VERDE){
+					if(colocarFichas[fila][columna+i] == Casillero.AMARILLO || colocarFichas[fila][columna+i] == Casillero.VERDE || colocarFichas[fila][columna+i] == Casillero.VACIO){
 						
 						for(int m = 0; m<4; m++){
 							
@@ -530,7 +530,7 @@ public class CuatroEnLinea {
 						}
 					}
 					
-					if(colocarFichas[fila][columna+i] == Casillero.ROJO || colocarFichas[fila][columna+i] == Casillero.VERDE){
+					if(colocarFichas[fila][columna+i] == Casillero.ROJO || colocarFichas[fila][columna+i] == Casillero.VERDE || colocarFichas[fila][columna+i] == Casillero.VACIO){
 						
 						for(int m = 0; m<4; m++){
 							
@@ -541,11 +541,9 @@ public class CuatroEnLinea {
 					}
 				}
 			}
-		}
-		
-		
+		}	
 	}
-	
+
 	public void buscar4enDiagonalVertical(String color){
 		
 		int contador = 0;
@@ -578,7 +576,7 @@ public class CuatroEnLinea {
 						}
 					}
 					
-					if(colocarFichas[fila+i][columna] == Casillero.AMARILLO || colocarFichas[fila+i][columna] == Casillero.VERDE){
+					if(colocarFichas[fila+i][columna] == Casillero.AMARILLO || colocarFichas[fila+i][columna] == Casillero.VERDE || colocarFichas[fila+i][columna] == Casillero.VACIO){
 						
 						for(int m = 0; m<4; m++){
 							
@@ -607,7 +605,7 @@ public class CuatroEnLinea {
 						}
 					}
 					
-					if(colocarFichas[fila+i][columna] == Casillero.ROJO || colocarFichas[fila+i][columna] == Casillero.VERDE){
+					if(colocarFichas[fila+i][columna] == Casillero.ROJO || colocarFichas[fila+i][columna] == Casillero.VERDE || colocarFichas[fila+i][columna] == Casillero.VACIO){
 						
 						for(int m = 0; m<4; m++){
 							
@@ -617,8 +615,7 @@ public class CuatroEnLinea {
 					}
 				}
 			}
-		}
-		
+		}	
 	}
 
 	/*
