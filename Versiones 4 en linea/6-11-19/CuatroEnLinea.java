@@ -1,7 +1,7 @@
 package juego;
 
 /**
- * Juego Cuatro en Lí­nea
+ * Juego Cuatro en LÃ­Â­nea
  * 
  * Reglas:
  * 
@@ -63,23 +63,11 @@ public class CuatroEnLinea {
 		 * Si es que existieron errores en el ingreso de los valores de filas y columnas
 		 * mostramos cuales errores fueron cometidos
 		 */
-		if(erroresFilasColumnas[0] && erroresFilasColumnas[1]){
-			
-			Error error = new Error("Cantidad de columnas y filas invalidas");
-			throw error;
-		}
+		if(erroresFilasColumnas[0] && erroresFilasColumnas[1])	throw = new Error("Cantidad de columnas y filas invalidas");
 		
-		if(erroresFilasColumnas[0]){
-			
-			Error error = new Error("Cantidad de filas invalidas");
-			throw error;
-		}
+		if(erroresFilasColumnas[0])	throw error = new Error("Cantidad de filas invalidas");
 		
-		if(erroresFilasColumnas[1]){
-			
-			Error error = new Error("Cantidad de columnas invalidas");
-			throw error;
-		}
+		if(erroresFilasColumnas[1])	throw new Error("Cantidad de columnas invalidas");
 	
 		/*
 		 * Chequeamos si las strings ingresadas como nombres para cada jugador son validas
@@ -103,29 +91,13 @@ public class CuatroEnLinea {
 		 * errores fueron cometidos
 		 */
 		
-		if (erroresNombres[2]){
-			
-			Error error = new Error("Los nombres de los jugadores son iguales");
-			throw error;
-		}
+		if (erroresNombres[2])	throw new Error("Los nombres de los jugadores son iguales");
 		
-		if (erroresNombres[0] && erroresNombres[1]){
-			
-			Error error = new Error("Los nombres de ambos jugadores son invalidos");
-			throw error;
-		}
+		if (erroresNombres[0] && erroresNombres[1])	throw new Error("Los nombres de ambos jugadores son invalidos");
+	
+		if (erroresNombres[0])	throw new Error("El nombre del jugador rojo es invalido");
 		
-		if (erroresNombres[0]){
-			
-			Error error = new Error("El nombre del jugador rojo es invalido");
-			throw error;
-		}
-		
-		if (erroresNombres[1]){
-			
-			Error error = new Error("El nombre del jugador amarillo es invalido");
-			throw error;
-		}
+		if (erroresNombres[1])	throw new Error("El nombre del jugador amarillo es invalido");
 		
 		/*
 		 * Inicializamos el array de 2 dimesiones que va a contener los valores de cada casillero
