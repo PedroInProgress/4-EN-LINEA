@@ -37,7 +37,8 @@ public class Aplicacion extends Application {
 
 	private Button botonIniciar;
 	
-	private int activado = 1;
+	private boolean activado = true;
+	public int alMejorDe = 1;
 	
 
 	@Override
@@ -55,7 +56,6 @@ public class Aplicacion extends Application {
 	private void crearGrilla() {
 
 		grilla = new GridPane();
-//		root = new FlowPane();
 		grilla.setAlignment(Pos.CENTER);
 		grilla.setHgap(10);
 		grilla.setVgap(10);
@@ -65,19 +65,19 @@ public class Aplicacion extends Application {
 		
 		crearControles();
 		
-//		final Spinner<Integer> spinner = new Spinner<Integer>();
-//		final int initialValue = 3;
-//		
-//		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5, initialValue);
-//		
-//		spinner.setValueFactory(valueFactory);
+		Button botonModoDeJuegoActivar = new Button("Activar");
+		Button botonModoDeJuegoDesactivar = new Button("Desactivar");
+
+		Label labelBotonModoDeJuego = new Label();
+		labelBotonModoDeJuego.setText("Activar modo varias\nfilas (DESACTIVADO)");
 		
-		Button modo1 = new Button("Cambiar");
-		Label modo1Label = new Label();
-		modo1Label.setText("Activar modo varias\nfilas (DESACTIVADO)");
+		Button botonAlMejorDeUno = new Button("  1  ");
+		Button botonAlMejorDeTres = new Button("  3  ");
+		Button botonAlMejorDeCinco = new Button("  5  ");
 		
-//		root.getChildren().addAll(modo1Label,spinner);
-		
+		Label labelbotonAlMejorDe = new Label();
+		labelbotonAlMejorDe.setText("Jugar al mejor de: 1");
+
 		grilla.add(textoTitulo, 0, 0, 2, 1);
 		grilla.add(new Label("Jugador Rojo"), 0, 1);
 		grilla.add(campoNombreJugadorRojo, 1, 1);
@@ -87,33 +87,102 @@ public class Aplicacion extends Application {
 		grilla.add(campoFilas, 1, 3);
 		grilla.add(new Label("Columnas (16 maximo)"), 0, 4);
 		grilla.add(campoColumnas, 1, 4);
-		grilla.add(modo1Label,0,5);
-		grilla.add(modo1, 1, 5, 1, 1);
-		grilla.add(botonIniciar, 0, 6, 2, 1);
+		grilla.add(labelBotonModoDeJuego,0,5);
+		grilla.add(botonModoDeJuegoActivar, 1, 5, 1, 1);
+		grilla.add(botonModoDeJuegoDesactivar, 1, 5, 1, 1);
+		grilla.add(labelbotonAlMejorDe,0,6);
+		grilla.add(botonAlMejorDeUno, 1, 6, 1, 1);
+		grilla.add(botonAlMejorDeTres, 1, 6, 1, 1);
+		grilla.add(botonAlMejorDeCinco, 1, 6, 1, 1);
+	
+
+		grilla.add(botonIniciar, 0, 7, 2, 1);
 		
 //		grilla.setGridLinesVisible(true);
-		
-		GridPane.setHalignment(modo1, HPos.CENTER);
+		GridPane.setHalignment(botonAlMejorDeUno, HPos.LEFT);
+		GridPane.setHalignment(botonAlMejorDeTres, HPos.CENTER);
+		GridPane.setHalignment(botonAlMejorDeCinco, HPos.RIGHT);
+
+		GridPane.setHalignment(botonModoDeJuegoActivar, HPos.LEFT);
+		GridPane.setHalignment(botonModoDeJuegoDesactivar, HPos.RIGHT);
 		GridPane.setHalignment(botonIniciar, HPos.CENTER);
 		GridPane.setHalignment(textoTitulo, HPos.CENTER);
 		
-		modo1.setOnAction(new EventHandler<ActionEvent>() {
+		botonModoDeJuegoActivar.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
 				
-				if(activado == 1){
-					
-					modo1Label.setText("Activar modo varias\nfilas (ACTIVADO)");
-				}
-				else{
-					
-					modo1Label.setText("Activar modo varias\nfilas (DESACTIVADO)");
-				}
-				activado *= -1;
+				activado = true;
+				
+				if(activado)	labelBotonModoDeJuego.setText("Activar modo varias\nfilas (ACTIVADO)");
+
+				else	labelBotonModoDeJuego.setText("Activar modo varias\nfilas (DESACTIVADO)");
 			}
 		});
-	
+		
+		botonModoDeJuegoDesactivar.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				activado = false;
+				
+				if(activado)	labelBotonModoDeJuego.setText("Activar modo varias\nfilas (ACTIVADO)");
+
+				else	labelBotonModoDeJuego.setText("Activar modo varias\nfilas (DESACTIVADO)");
+			}
+		});
+		
+		botonAlMejorDeUno.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				alMejorDe = 1;
+				
+				if(alMejorDe == 1)	labelbotonAlMejorDe.setText("Jugar al mejor de: 1");
+				
+				else if(alMejorDe == 3)	labelbotonAlMejorDe.setText("Jugar al mejor de: 3");
+				
+				else if(alMejorDe == 5)	labelbotonAlMejorDe.setText("Jugar al mejor de: 5");
+				
+				
+
+			}
+		});
+		
+		botonAlMejorDeTres.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				alMejorDe = 3;
+				
+				if(alMejorDe == 1)	labelbotonAlMejorDe.setText("Jugar al mejor de: 1");
+				
+				else if(alMejorDe == 3)	labelbotonAlMejorDe.setText("Jugar al mejor de: 3");
+				
+				else if(alMejorDe == 5)	labelbotonAlMejorDe.setText("Jugar al mejor de: 5");
+
+			}
+		});
+		
+		botonAlMejorDeCinco.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+				alMejorDe = 5;
+				
+				if(alMejorDe == 1)	labelbotonAlMejorDe.setText("Jugar al mejor de: 1");
+				
+				else if(alMejorDe == 3)	labelbotonAlMejorDe.setText("Jugar al mejor de: 3");
+				
+				else if(alMejorDe == 5)	labelbotonAlMejorDe.setText("Jugar al mejor de: 5");
+
+			}
+		});
 	}
 
 	private void crearControles() {

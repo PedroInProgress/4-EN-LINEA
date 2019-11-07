@@ -34,9 +34,6 @@ import javafx.stage.Stage;
 import javafx.application.Application;  
 import javafx.scene.Group;  
 
-
-
-
 /**
  * Representación gráfica del Tablero del Juego Cuatro en Lí­nea.
  * 
