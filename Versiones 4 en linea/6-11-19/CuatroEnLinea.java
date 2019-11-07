@@ -27,13 +27,19 @@ public class CuatroEnLinea {
 	private Lista[] indicesDiagonales = new Lista[4];
 	/*Array que contiene las 4 posiciones [fila][columna] correspondientes a las fichas que forman 4 en linea*/
 	private Lista[] cuatroFichasSeguidas = new Lista[4];
+	private boolean hayGanador = false;
 	
 	
 	
-	/*
+	/**
 	 * 
 	 * post: si los valores ingresados son correctos, asigna el valor de los atributos
 	 * 		 correspondientes
+	 * 
+	 * @param filas
+	 * @param columnas
+	 * @param jugadorRojo
+	 * @param jugadorAmarillo
 	 */
 	
 	public CuatroEnLinea(int filas, int columnas, String jugadorRojo, String jugadorAmarillo){
@@ -141,6 +147,7 @@ public class CuatroEnLinea {
 	 * 
 	 * post: devuelve el numero de filas del tablero
 	 */
+	
 	public int contarFilas(){
 		
 		return filas;
@@ -151,16 +158,20 @@ public class CuatroEnLinea {
 	 * 
 	 * post: devuelve el numero de columnas del tablero
 	 */
+	
 	public int contarColumnas(){
 		
 		return columnas;
 	}
 
-	/*
+	/**
 	 * pre: ?
 	 * 
 	 * post: devuelve el valor contenido en la posicion [fila][columna] del array de 2 dimesiones
 	 * 		 que representa al tablero
+	 * 
+	 * @param fila
+	 * @param columna
 	 */
 	
 	public Casillero obtenerCasillero(int fila, int columna){
@@ -168,11 +179,13 @@ public class CuatroEnLinea {
 		return colocarFichas[fila - 1][columna - 1];
 	}
 
-	/*
+	/**
 	 * pre: la columna ingresada para colocar una ficha, esta dentro del rango: (1 - columnas-1)
 	 * 
 	 * post: coloca una ficha en la columna del tablero indicada, en la proxima posicion 
 	 * 		 mas proxima al "fondo" del tablero
+	 * 
+	 * @param columna
 	 */
 	
 	public void soltarFicha(int columna){
@@ -187,38 +200,30 @@ public class CuatroEnLinea {
 						
 					colocarFichas[i - 1][columna - 1] = Casillero.ROJO;
 					
-//					lugarFicha[0] = i - 1;
-//					lugarFicha[1] = columna - 1;
-					
-					diagonalVertical("rojo",i-1,columna-1);
-					diagonalHorizontal("rojo",i-1,columna-1);
-					diagonalArriba("rojo",i-1,columna-1);
 					diagonalAbajo("rojo",i-1,columna-1);
-
-//					lugarFicha[0] = 0;
-//					lugarFicha[1] = 0;
+					diagonalArriba("rojo",i-1,columna-1);
+					diagonalHorizontal("rojo",i-1,columna-1);
+					diagonalVertical("rojo",i-1,columna-1);
 					
+					averiguarSiElTableroEstaLLeno();
+
 					turnoDeJugadorRojo = false;
+					
 				}
 				
 				if (i == filas-1 && colocarFichas[i][columna - 1] == Casillero.VACIO){
 						
 					colocarFichas[i][columna - 1] = Casillero.ROJO;
-					
-//					lugarFicha[0] = i;
-//					lugarFicha[1] = columna - 1;
-					
-					diagonalVertical("rojo",i,columna-1);
-					diagonalHorizontal("rojo",i,columna-1);
-					diagonalArriba("rojo",i,columna-1);
+
 					diagonalAbajo("rojo",i,columna-1);
+					diagonalArriba("rojo",i,columna-1);
+					diagonalHorizontal("rojo",i,columna-1);
+					diagonalVertical("rojo",i,columna-1);
 					
-//					lugarFicha[0] = 0;
-//					lugarFicha[1] = 0;
+					averiguarSiElTableroEstaLLeno();
 					
 					turnoDeJugadorRojo = false;
 				}
-				
 			}
 		}	
 		
@@ -232,14 +237,13 @@ public class CuatroEnLinea {
 						&& i != 0) && colocarFichas[i - 1][columna - 1] == Casillero.VACIO) {
 						
 					colocarFichas[i - 1][columna - 1] = Casillero.AMARILLO;
+
+					diagonalAbajo("amarillo",i-1,columna-1);
+					diagonalArriba("amarillo",i-1,columna-1);
+					diagonalHorizontal("amarillo",i-1,columna-1);
+					diagonalVertical("amarillo",i-1,columna-1);
 					
-//					lugarFicha[0] = i - 1;
-//					lugarFicha[1] = columna - 1;
-					
-					diagonalVertical("amarillo",i - 1,columna - 1);
-					diagonalHorizontal("amarillo",i - 1,columna - 1);
-					diagonalArriba("amarillo",i - 1,columna - 1);
-					diagonalAbajo("amarillo",i - 1,columna - 1);
+					averiguarSiElTableroEstaLLeno();
 					
 					turnoDeJugadorRojo = true;
 				
@@ -248,14 +252,13 @@ public class CuatroEnLinea {
 				if (i == filas-1 && colocarFichas[i][columna - 1] == Casillero.VACIO){
 			
 					colocarFichas[i][columna - 1] = Casillero.AMARILLO;
+
+					diagonalAbajo("amarillo",i,columna-1);
+					diagonalArriba("amarillo",i,columna-1);
+					diagonalHorizontal("amarillo",i,columna-1);
+					diagonalVertical("amarillo",i,columna-1);
 					
-//					lugarFicha[0] = i;
-//					lugarFicha[1] = columna - 1;
-					
-					diagonalVertical("amarillo",i,columna - 1);
-					diagonalHorizontal("amarillo",i,columna - 1);
-					diagonalArriba("amarillo",i,columna - 1);
-					diagonalAbajo("amarillo",i,columna - 1);
+					averiguarSiElTableroEstaLLeno();
 					
 					turnoDeJugadorRojo = true;
 				}
@@ -269,10 +272,12 @@ public class CuatroEnLinea {
 		}
 	}
 	
-	/*
+	/**
+	 * 
 	 * pre: un jugador consiguio alinear 4 fichas del mismo color
 	 * 
 	 * post: se "pinta" las 4 fichas alineadas del color verde
+	 * 
 	 * 
 	 */
 	
@@ -287,12 +292,14 @@ public class CuatroEnLinea {
 		
 	}
 
-	/*
+	/**
 	 * pre:
 	 * 
 	 * post: los 4 metodos llamados buscar4EnDiagonal... buscan si existen 4 fichas seguidas alineadas 
 	 * 		 del color indicado como parametro, si pasa esto, llama al metodo pintar de verde y cambia 
 	 * 		 el valor de la variable ganador por el jugador que consiguio alinear las fichas
+	 * 
+	 * @param color
 	 * 
 	 */
 	
@@ -325,6 +332,7 @@ public class CuatroEnLinea {
 							System.out.println("gane");
 							pintarDeVerde();
 							ganador = jugadorRojo;
+							hayGanador = true;
 							contador = 0;
 						}
 					}
@@ -355,6 +363,7 @@ public class CuatroEnLinea {
 							System.out.println("gane");
 							pintarDeVerde();
 							ganador = jugadorAmarillo;
+							hayGanador = true;
 							contador = 0;
 						}
 					}
@@ -371,6 +380,17 @@ public class CuatroEnLinea {
 			}
 		}		
 	}
+	
+	/**
+	 * pre:
+	 * 
+	 * post: los 4 metodos llamados buscar4EnDiagonal... buscan si existen 4 fichas seguidas alineadas 
+	 * 		 del color indicado como parametro, si pasa esto, llama al metodo pintar de verde y cambia 
+	 * 		 el valor de la variable ganador por el jugador que consiguio alinear las fichas
+	 * 
+	 * @param color
+	 * 
+	 */
 	
 	public void buscar4enDiagonalArriba(String color){
 		
@@ -412,6 +432,7 @@ public class CuatroEnLinea {
 							
 							pintarDeVerde();
 							ganador = jugadorRojo;
+							hayGanador = true;
 							contador = 0;
 						}
 					}
@@ -452,6 +473,7 @@ public class CuatroEnLinea {
 							
 							pintarDeVerde();
 							ganador = jugadorAmarillo;
+							hayGanador = true;
 							contador = 0;
 						}
 					}
@@ -468,6 +490,17 @@ public class CuatroEnLinea {
 			}
 		}		
 	}
+	
+	/**
+	 * pre:
+	 * 
+	 * post: los 4 metodos llamados buscar4EnDiagonal... buscan si existen 4 fichas seguidas alineadas 
+	 * 		 del color indicado como parametro, si pasa esto, llama al metodo pintar de verde y cambia 
+	 * 		 el valor de la variable ganador por el jugador que consiguio alinear las fichas
+	 * 
+	 * @param color
+	 * 
+	 */
 	
 	public void buscar4enDiagonalHorizontal(String color){
 		
@@ -497,6 +530,7 @@ public class CuatroEnLinea {
 							
 							pintarDeVerde();
 							ganador = jugadorRojo;
+							hayGanador = true;
 							contador = 0;
 						}
 					}
@@ -526,6 +560,7 @@ public class CuatroEnLinea {
 							
 							pintarDeVerde();
 							ganador = jugadorAmarillo;
+							hayGanador = true;
 							contador = 0;
 						}
 					}
@@ -541,9 +576,22 @@ public class CuatroEnLinea {
 					}
 				}
 			}
-		}	
+		}
+		
+		
 	}
-
+	
+	/**
+	 * pre:
+	 * 
+	 * post: los 4 metodos llamados buscar4EnDiagonal... buscan si existen 4 fichas seguidas alineadas 
+	 * 		 del color indicado como parametro, si pasa esto, llama al metodo pintar de verde y cambia 
+	 * 		 el valor de la variable ganador por el jugador que consiguio alinear las fichas
+	 * 
+	 * @param color
+	 * 
+	 */
+	
 	public void buscar4enDiagonalVertical(String color){
 		
 		int contador = 0;
@@ -572,6 +620,7 @@ public class CuatroEnLinea {
 							
 							pintarDeVerde();
 							ganador = jugadorRojo;
+							hayGanador = true;
 							contador = 0;
 						}
 					}
@@ -601,6 +650,7 @@ public class CuatroEnLinea {
 							
 							pintarDeVerde();
 							ganador = jugadorAmarillo;
+							hayGanador = true;
 							contador = 0;
 						}
 					}
@@ -615,32 +665,48 @@ public class CuatroEnLinea {
 					}
 				}
 			}
-		}	
+		}
+		
 	}
 
-	/*
+	/**
 	 * 
 	 * post: guarda en el indice del array indicesDiagonales, la posicion [fila][columna]
 	 *		 que luego se usara como posicion inicial para chequear si existen 4 fichas
 	 *		 alineadas en las diagonales 
+	 *
+	 * @param color
+	 * @param comienzoFila
+	 * @param comienzoColumna
+	 *
 	 */
 	
 	public void diagonalAbajo(String color, int comienzoFila, int comienzoColumna){
-		
-		while(comienzoFila - 1 >= 0 && comienzoColumna - 1 >= 0){
 			
+			
+		while(comienzoFila - 1 >= 0 && comienzoColumna - 1 >= 0){
+				
 			comienzoFila -= 1;
 			comienzoColumna -= 1;
 		}
-		
-		System.out.println(comienzoFila);
-		System.out.println(comienzoColumna);
-		
-		
+			
 		indicesDiagonales[0] = new Lista(comienzoFila,comienzoColumna);
-		
+			
 		buscar4enDiagonalAbajo(color);
+		
 	}
+	
+	/**
+	 * 
+	 * post: guarda en el indice del array indicesDiagonales, la posicion [fila][columna]
+	 *		 que luego se usara como posicion inicial para chequear si existen 4 fichas
+	 *		 alineadas en las diagonales 
+	 *
+	 * @param color
+	 * @param comienzoFila
+	 * @param comienzoColumna
+	 *
+	 */
 	
 	public void diagonalArriba(String color, int comienzoFila, int comienzoColumna){
 		
@@ -655,6 +721,18 @@ public class CuatroEnLinea {
 		buscar4enDiagonalArriba(color);
 	}
 	
+	/**
+	 * 
+	 * post: guarda en el indice del array indicesDiagonales, la posicion [fila][columna]
+	 *		 que luego se usara como posicion inicial para chequear si existen 4 fichas
+	 *		 alineadas en las diagonales 
+	 *
+	 * @param color
+	 * @param comienzoFila
+	 * @param comienzoColumna
+	 *
+	 */
+	
 	public void diagonalHorizontal(String color, int comienzoFila, int comienzoColumna){
 		
 		while(comienzoColumna - 1 >=0){
@@ -666,6 +744,18 @@ public class CuatroEnLinea {
 		
 		buscar4enDiagonalHorizontal(color);
 	}
+	
+	/**
+	 * 
+	 * post: guarda en el indice del array indicesDiagonales, la posicion [fila][columna]
+	 *		 que luego se usara como posicion inicial para chequear si existen 4 fichas
+	 *		 alineadas en las diagonales 
+	 *
+	 * @param color
+	 * @param comienzoFila
+	 * @param comienzoColumna
+	 *
+	 */
 	
 	public void diagonalVertical(String color, int comienzoFila, int comienzoColumna){
 		
@@ -680,6 +770,64 @@ public class CuatroEnLinea {
 	}
 	
 	/*
+	 * 
+	 * post: reincia el juego
+	 */
+	
+	public void reiniciarJuego(){
+		
+		for (int i = 0; i < colocarFichas.length; i++) {
+			
+			for (int j = 0; j < colocarFichas[i].length; j++)
+				
+				colocarFichas[i][j] = Casillero.VACIO;
+		}
+		
+		juegoTerminado = false;
+		hayGanador = false;
+		turnoDeJugadorRojo = true;
+		ganador = null;
+	}
+	
+	/*
+	 * pre:	ya no hay lugar en el tablero para poner otra ficha
+	 * 
+	 * post: termina el juego 
+	 * 
+	 */
+	
+	public void averiguarSiElTableroEstaLLeno(){
+		
+		int contador = 0;
+		
+		if(!hayGanador){
+			
+			for(int i = 0; i<columnas; i++){
+				
+				if(colocarFichas[0][i] != Casillero.VACIO){
+					
+					contador++;
+				}
+			}
+			
+			if (contador == columnas){
+				
+				juegoTerminado = true;
+				hayGanador = false;
+			}
+		}
+	}
+	
+	/*
+	 * post: retorna a quien le toca tirar la ficha
+	 */
+	
+	public boolean obtenerJugador(){
+		
+		return turnoDeJugadorRojo;
+	}
+	
+	/*
 	 * post: retorna si el juego ha finalizado
 	 */
 	
@@ -691,15 +839,102 @@ public class CuatroEnLinea {
 	/*
 	 * post: retorna si existe un ganador 
 	 */
+	
 	public boolean hayGanador() {
 		
-		return true;
+		return hayGanador;
 	}
 	
 	/*
 	 * post: retorna el ganador del juego
 	 */
+	
 	public String obtenerGanador() {	
 		return ganador;
 	}
 }
+
+///**
+// * 
+// * post: guarda en el indice del array indicesDiagonales, la posicion [fila][columna]
+// *		 que luego se usara como posicion inicial para chequear si existen 4 fichas
+// *		 alineadas en las diagonales 
+// *
+// * IMPORTANTE:
+// * 
+// * 		direccion representa que diagonal fue elegida
+// *		1 = diagonalAbajo
+// *      2 = diagonalArriba 		
+// * 		3 = diagonalHorizontal
+// * 		4 = diagonalVertical
+// *		
+// * @param color
+// * @param comienzoFila
+// * @param comienzoColumna
+// * @param direccion
+// *
+// */
+//
+//public void encontrarIndiceDeDiagonal(String color, int comienzoFila, int comienzoColumna, int direccion){
+//		
+//	switch (direccion) {
+//	
+//	case 1:
+//		
+//		while(comienzoFila - 1 >= 0 && comienzoColumna - 1 >= 0){
+//			
+//			comienzoFila -= 1;
+//			comienzoColumna -= 1;
+//		}
+//		
+//		indicesDiagonales[0] = new Lista(comienzoFila,comienzoColumna);
+//		
+//		buscar4enDiagonalAbajo(color);
+//		
+//		break;
+//		
+//	case 2:
+//		
+//		while(comienzoFila + 1 <= filas-1 && comienzoColumna - 1 >= 0){
+//			
+//			comienzoFila += 1;
+//			comienzoColumna -= 1;
+//		}
+//		
+//		indicesDiagonales[1] = new Lista(comienzoFila,comienzoColumna);
+//		
+//		buscar4enDiagonalArriba(color);
+//		
+//		break;
+//		
+//	case 3:
+//		
+//		while(comienzoColumna - 1 >=0){
+//			
+//			comienzoColumna -= 1;
+//		}
+//		
+//		indicesDiagonales[2] = new Lista(comienzoFila,comienzoColumna);
+//		
+//		buscar4enDiagonalHorizontal(color);
+//
+//		break;
+//
+//	case 4:
+//		
+//		while(comienzoFila - 1 >= 0){
+//			
+//			comienzoFila -= 1;
+//		}
+//		
+//		indicesDiagonales[3] = new Lista(comienzoFila,comienzoColumna);
+//		
+//		buscar4enDiagonalVertical(color);
+//
+//		break;
+//
+//	default:
+//		
+//		break;
+//	}
+//}

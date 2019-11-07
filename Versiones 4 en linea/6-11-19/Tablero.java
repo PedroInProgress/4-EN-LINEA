@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 
 
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -61,6 +62,7 @@ public class Tablero {
 		juego = nuevoJuego;
 		escenario = new Stage();
 		grilla = new GridPane();
+	
 	}
 	
 	/**
@@ -124,6 +126,7 @@ public class Tablero {
 
 	/**
 	 * post: dibuja y devuelve el casillero dado.
+	 * 
 	 * 
 	 * @param casillero
 	 * @return representación gráfica del Casillero.
@@ -192,6 +195,17 @@ public class Tablero {
 			}
 		});
 		
+		botonJugarDeNuevo.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				reiniciarTablero();
+				((Stage)(((Button)arg0.getSource()).getScene().getWindow())).close();
+			}
+		});
+		
+
+		
 		Text textoJugarDeNuevo = new Text();
 		Text textoResultado = new Text();
 		Font fuente = new Font(28.0);
@@ -241,5 +255,11 @@ public class Tablero {
 
 		dialogo.setScene(escenaGanador);
 		dialogo.show();
+	}
+	
+	public void reiniciarTablero(){
+		
+		juego.reiniciarJuego();
+		dibujar();
 	}
 }
