@@ -63,9 +63,9 @@ public class CuatroEnLinea {
 		 * Si es que existieron errores en el ingreso de los valores de filas y columnas
 		 * mostramos cuales errores fueron cometidos
 		 */
-		if(erroresFilasColumnas[0] && erroresFilasColumnas[1])	throw = new Error("Cantidad de columnas y filas invalidas");
+		if(erroresFilasColumnas[0] && erroresFilasColumnas[1])	throw new Error("Cantidad de columnas y filas invalidas");
 		
-		if(erroresFilasColumnas[0])	throw error = new Error("Cantidad de filas invalidas");
+		if(erroresFilasColumnas[0])	throw new Error("Cantidad de filas invalidas");
 		
 		if(erroresFilasColumnas[1])	throw new Error("Cantidad de columnas invalidas");
 	
