@@ -161,76 +161,37 @@ public class CuatroEnLinea {
 	
 	public void soltarFicha(int columna){
 
-		if (turnoDeJugadorRojo && columna <= columnas && columna >= 0 && !juegoTerminado){
-			
-			for (int i = 0; i < filas && turnoDeJugadorRojo; i++) {
-				
-				if (((colocarFichas[i][columna - 1] == Casillero.ROJO || 
-					  colocarFichas[i][columna - 1] == Casillero.AMARILLO || colocarFichas[i][columna - 1] == Casillero.VERDE) &&  i != 0 )
-				   && colocarFichas[i - 1][columna - 1] == Casillero.VACIO) {
-						
-					colocarFichas[i - 1][columna - 1] = Casillero.ROJO;
-					
-					diagonalAbajo("rojo",i-1,columna-1);
-					diagonalArriba("rojo",i-1,columna-1);
-					diagonalHorizontal("rojo",i-1,columna-1);
-					diagonalVertical("rojo",i-1,columna-1);
-					
-					averiguarSiElTableroEstaLLeno();
-
-					turnoDeJugadorRojo = false;
-					
-				}
-				
-				if (i == filas-1 && colocarFichas[i][columna - 1] == Casillero.VACIO){
-						
-					colocarFichas[i][columna - 1] = Casillero.ROJO;
-
+		if (turnoDeJugadorRojo && !juegoTerminado && columna > 0 && columna <= columnas){
+			for (int i=filas-1; i>=0 && turnoDeJugadorRojo; i--){
+				if(colocarFichas[i][columna-1] == Casillero.VACIO){
+					colocarFichas[i][columna-1] = Casillero.ROJO;
 					diagonalAbajo("rojo",i,columna-1);
 					diagonalArriba("rojo",i,columna-1);
 					diagonalHorizontal("rojo",i,columna-1);
 					diagonalVertical("rojo",i,columna-1);
 					
-					averiguarSiElTableroEstaLLeno();
-					
+					averiguarSiElTableroEstaLleno();
+
 					turnoDeJugadorRojo = false;
 				}
 			}
-		}	
+		}
+					
+					
+					
+			
 		
-		else if (!turnoDeJugadorRojo && columna <= columnas && columna >= 0 && !juegoTerminado) {
-			
-			for (int i = 0; i < filas && !turnoDeJugadorRojo; i++) {
-				
-				if (((colocarFichas[i][columna - 1] == Casillero.ROJO || 
-						colocarFichas[i][columna - 1] == Casillero.AMARILLO|| 
-						colocarFichas[i][columna - 1] == Casillero.VERDE)
-						&& i != 0) && colocarFichas[i - 1][columna - 1] == Casillero.VACIO) {
-						
-					colocarFichas[i - 1][columna - 1] = Casillero.AMARILLO;
-
-					diagonalAbajo("amarillo",i-1,columna-1);
-					diagonalArriba("amarillo",i-1,columna-1);
-					diagonalHorizontal("amarillo",i-1,columna-1);
-					diagonalVertical("amarillo",i-1,columna-1);
-					
-					averiguarSiElTableroEstaLLeno();
-					
-					turnoDeJugadorRojo = true;
-				
-				}
-				
-				if (i == filas-1 && colocarFichas[i][columna - 1] == Casillero.VACIO){
-			
-					colocarFichas[i][columna - 1] = Casillero.AMARILLO;
-
+		else if (!turnoDeJugadorRojo && !juegoTerminado && columna > 0 && columna <= columnas){
+			for (int i=filas-1; i>=0 && !turnoDeJugadorRojo; i--){
+				if(colocarFichas[i][columna-1] == Casillero.VACIO){
+					colocarFichas[i][columna-1] = Casillero.AMARILLO;
 					diagonalAbajo("amarillo",i,columna-1);
 					diagonalArriba("amarillo",i,columna-1);
 					diagonalHorizontal("amarillo",i,columna-1);
 					diagonalVertical("amarillo",i,columna-1);
 					
-					averiguarSiElTableroEstaLLeno();
-					
+					averiguarSiElTableroEstaLleno();
+
 					turnoDeJugadorRojo = true;
 				}
 			}
@@ -300,7 +261,7 @@ public class CuatroEnLinea {
 
 						if(contador == 4){
 							
-							System.out.println("gane");
+//							System.out.println("gane");
 							pintarDeVerde();
 							ganador = jugadorRojo;
 							hayGanador = true;
@@ -331,7 +292,7 @@ public class CuatroEnLinea {
 
 						if(contador == 4){
 							
-							System.out.println("gane");
+//							System.out.println("gane");
 							pintarDeVerde();
 							ganador = jugadorAmarillo;
 							hayGanador = true;
@@ -387,17 +348,17 @@ public class CuatroEnLinea {
 						
 						contador++;
 						
-						System.out.println(contador+" contador");
+//						System.out.println(contador+" contador");
 						
-						for(int k = 0; k<4; k++){
-							
-							for(int l = 0; l<2; l++){
-								
-								System.out.println(cuatroFichasSeguidas[k].array[l]+" si");
-							}
-							System.out.println("\n");
-							
-						}
+//						for(int k = 0; k<4; k++){
+//							
+//							for(int l = 0; l<2; l++){
+//								
+//								System.out.println(cuatroFichasSeguidas[k].array[l]+" si");
+//							}
+//							System.out.println("\n");
+//							
+//						}
 						
 						if(contador == 4){
 							
@@ -428,17 +389,17 @@ public class CuatroEnLinea {
 						
 						contador++;
 						
-						System.out.println(contador+" contador");
+//						System.out.println(contador+" contador");
 						
-						for(int k = 0; k<4; k++){
-							
-							for(int l = 0; l<2; l++){
-								
-								System.out.println(cuatroFichasSeguidas[k].array[l]+" si");
-							}
-							System.out.println("\n");
-							
-						}
+//						for(int k = 0; k<4; k++){
+//							
+////							for(int l = 0; l<2; l++){
+////								
+////								System.out.println(cuatroFichasSeguidas[k].array[l]+" si");
+////							}
+////							System.out.println("\n");
+//							
+//						}
 						
 						if(contador == 4){
 							
@@ -767,7 +728,7 @@ public class CuatroEnLinea {
 	 * 
 	 */
 	
-	private void averiguarSiElTableroEstaLLeno(){
+	private void averiguarSiElTableroEstaLleno(){
 		
 		int contador = 0;
 		
