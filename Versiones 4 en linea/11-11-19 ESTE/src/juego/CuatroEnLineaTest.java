@@ -222,23 +222,6 @@ public class CuatroEnLineaTest {
 			}
 			
 		}
-		
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(1,1));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(1,2));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(1,3));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(1,4));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(2,1));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(2,2));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(2,3));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(2,4));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(3,1));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(3,2));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(3,3));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(3,4));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(4,1));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(4,2));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(4,3));
-//		assertEquals(Casillero.VACIO, c.obtenerCasillero(4,4));
 	
 	}
 	
@@ -349,30 +332,30 @@ public class CuatroEnLineaTest {
 		
 	}
 	
-//	@Test
-//	
-//	public void terminoElJuegoYEmpataron(){
-//		
-//		CuatroEnLinea c = new CuatroEnLinea(4, 4, "Juan", "Pedro");
-//		c.soltarFicha(1);
-//		c.soltarFicha(1);
-//		c.soltarFicha(1);
-//		c.soltarFicha(1);
-//		c.soltarFicha(3);
-//		c.soltarFicha(2);
-//		c.soltarFicha(2);
-//		c.soltarFicha(2);
-//		c.soltarFicha(2);
-//		c.soltarFicha(3);
-//		c.soltarFicha(3);
-//		c.soltarFicha(3);
-//		c.soltarFicha(4);
-//		c.soltarFicha(4);
-//		c.soltarFicha(4);
-//		c.soltarFicha(4);
-//		
-//		assertEquals(true, c.termino());
-//	}
+	@Test
+	
+	public void terminoElJuegoYEmpataron(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(4, 4, "Juan", "Pedro");
+		c.soltarFicha(1);
+		c.soltarFicha(1);
+		c.soltarFicha(1);
+		c.soltarFicha(1);
+		c.soltarFicha(3);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(3);
+		c.soltarFicha(3);
+		c.soltarFicha(3);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		
+		assertEquals(true, c.termino());
+	}
 	
 	@Test(expected = Error.class)
 	
@@ -436,27 +419,384 @@ public class CuatroEnLineaTest {
 	
 	@Test
 	
-	public void obtenerUn5EnLinea(){
+	public void obtenerUn4EnLineaEnLosBordes(){
 		
 		CuatroEnLinea c = new CuatroEnLinea(5,5, "Pedro","Juan");
 		
 		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(1);
+		
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(2, 1));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(3, 1));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(4, 1));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(5, 1));
+	
+			
+	}
+	
+	@Test
+	
+	public void probarQueElJugadorUnoEsDelColorRojo(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 16, "Pedro", "Juan");
+		
+		assertEquals(Casillero.ROJO, c.colorDelJugador1());
+	}
+	
+
+	@Test
+	
+	public void probarQueElJugadorDosEsDelColorAmarillo(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 16, "Pedro", "Juan");
+		
+		assertEquals(Casillero.AMARILLO, c.colorDelJugador2());
+	}
+	
+	@Test
+	
+	public void obtenerNombreDelJugadorUno(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 16, "Pedro", "Juan");
+		
+		assertEquals("Pedro", c.obtenerNombreJugador1());
+		
+	}
+	
+	@Test
+	
+	public void obtenerNombreDelJugadorDos(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 16, "Pedro", "Juan");
+		
+		assertEquals("Juan", c.obtenerNombreJugador2());
+		
+	}
+	
+	@Test
+	
+	public void reiniciarElJuego(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 16, "Pedro", "Juan");
+		
+		c.reiniciarJuego();
+	
+		assertEquals(null, c.obtenerGanador());
+		assertFalse(c.hayGanador());
+		assertFalse(c.termino());
+		assertTrue(c.obtenerJugador());
+		
+	}
+	
+	@Test
+	
+	public void obtenerUnCuatroEnLineaEnLaPrimerFila(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(4, 5, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(1);
+		c.soltarFicha(1);
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(3);
+		c.soltarFicha(3);
+		c.soltarFicha(3);
+		c.soltarFicha(3);
+		c.soltarFicha(5);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(5);
+		c.soltarFicha(4);
+		
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(1, 1));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(1, 2));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(1, 3));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(1, 4));
+	}
+	
+	@Test
+	
+	public void obtenerUnCuatroEnLineaEnLaMitadDelTablero(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(5, 4, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(1);
 		c.soltarFicha(1);
 		c.soltarFicha(2);
 		c.soltarFicha(2);
 		c.soltarFicha(3);
 		c.soltarFicha(3);
-		c.soltarFicha(5);
-		c.soltarFicha(2);
+		c.soltarFicha(4);
+		c.soltarFicha(3);
+		c.soltarFicha(4);
 		c.soltarFicha(4);
 		
-		assertEquals(Casillero.VERDE, c.obtenerCasillero(5, 1));
-		assertEquals(Casillero.VERDE, c.obtenerCasillero(5, 2));
-		assertEquals(Casillero.VERDE, c.obtenerCasillero(5, 3));
-		assertEquals(Casillero.VERDE, c.obtenerCasillero(5, 4));
-//		assertEquals(Casillero.VERDE, c.obtenerCasillero(5, 5));
-	
-			
-		}
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(3, 1));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(3, 2));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(3, 3));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(3, 4));
 		
+	}
+	
+	
+	@Test
+	
+	public void obtenerUnCuatroEnLineaEnLaDiagonalDerechaDelTablero(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(5, 4, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(3);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(3);
+		c.soltarFicha(3);
+		c.soltarFicha(1);
+		c.soltarFicha(4);
+		
+		
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(2, 4));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(3, 3));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(4, 2));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(5, 1));
+	
+	}
+	
+	@Test
+	
+	public void obtenerUnCuatroEnLineaEnLaDiagonalIzquierdaDelTablero(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(5, 4, "Pedro", "Juan");
+		
+		c.soltarFicha(4);
+		c.soltarFicha(3);
+		c.soltarFicha(3);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(1);
+		c.soltarFicha(1);
+		c.soltarFicha(4);
+		c.soltarFicha(1);
+		
+		
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(2, 1));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(3, 2));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(4, 3));
+		assertEquals(Casillero.VERDE, c.obtenerCasillero(5, 4));
+	
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe5x5(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(5, 5, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(5);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(5, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(5, 5));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe6x6(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(6, 6, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(6);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(6, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(6, 6));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe7x7(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(7, 7, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(7);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(7, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(7, 7));
+	}
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x8(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 8, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(8);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 8));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x9(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 9, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(9);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 9));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x10(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 10, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(10);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 10));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x11(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 11, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(11);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 11));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x12(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 12, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(12);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 12));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x13(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 13, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(13);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 13));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x14(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 14, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(14);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 14));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x15(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 15, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(15);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 15));
+	}
+	
+	@Test
+	
+	public void ponerUnaFichaEnCadaExtremoDelTableroDe8x16(){
+		
+		CuatroEnLinea c = new CuatroEnLinea(8, 16, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(16);
+		
+		assertEquals(Casillero.ROJO, c.obtenerCasillero(8, 1));
+		assertEquals(Casillero.AMARILLO, c.obtenerCasillero(8, 16));
+	}
+	
+	@Test
+	
+	public void llenarUnTableroDe5x5(){
+		
+
+		CuatroEnLinea c = new CuatroEnLinea(5, 5, "Pedro", "Juan");
+		
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(2);
+		c.soltarFicha(3);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(3);
+		c.soltarFicha(3);
+		c.soltarFicha(1);
+		c.soltarFicha(5);
+		c.soltarFicha(5);
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		c.soltarFicha(5);
+		c.soltarFicha(4);
+		c.soltarFicha(4);
+		c.soltarFicha(3);
+		c.soltarFicha(5);
+		c.soltarFicha(5);
+		c.soltarFicha(1);
+		c.soltarFicha(3);
+		c.soltarFicha(2);
+		c.soltarFicha(1);
+		c.soltarFicha(2);
+		
+		assertEquals(null, c.obtenerGanador());
+		assertEquals(true, c.termino());
+		
+		
+	}
+	
+	
+	
 }
