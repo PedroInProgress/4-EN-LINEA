@@ -555,7 +555,7 @@ public class CuatroEnLinea {
 
 		juegoTerminado = false;
 		hayGanador = false;
-		turnoDeJugador1 = true;
+		turnoDeJugador1 = (turnoDeJugador1)? true:false;
 		ganador = null;
 		
 		if(resultadoFinal){
