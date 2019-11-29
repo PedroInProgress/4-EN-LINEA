@@ -882,7 +882,8 @@ public class CuatroEnLineaTest {
 		juego.soltarFicha(2);
 		juego.soltarFicha(1);
 		juego.soltarFicha(2);
-		juego.soltarFicha(1);
+		juego.soltarFicha(3);
+		juego.soltarFicha(2);
 		
 		assertEquals(2, juego.obtenerGanadasDel1());
 		assertEquals(true, juego.obtenerGanadorFinal());
@@ -909,8 +910,7 @@ public class CuatroEnLineaTest {
 		juego.soltarFicha(2);
 		juego.soltarFicha(1);
 		juego.soltarFicha(2);
-		juego.soltarFicha(3);
-		juego.soltarFicha(2);
+		juego.soltarFicha(1);
 		
 		
 		assertEquals(1, juego.obtenerGanadasDel1());
@@ -939,8 +939,7 @@ public class CuatroEnLineaTest {
 		juego.soltarFicha(2);
 		juego.soltarFicha(1);
 		juego.soltarFicha(2);
-		juego.soltarFicha(3);
-		juego.soltarFicha(2);
+		juego.soltarFicha(1);
 		
 		juego.reiniciarJuego();
 		
@@ -988,8 +987,7 @@ public class CuatroEnLineaTest {
 		juego.soltarFicha(2);
 		juego.soltarFicha(1);
 		juego.soltarFicha(2);
-		juego.soltarFicha(3);
-		juego.soltarFicha(2);
+		juego.soltarFicha(1);
 		
 		juego.reiniciarJuego();
 		
@@ -1018,11 +1016,10 @@ public class CuatroEnLineaTest {
 		juego.soltarFicha(2);
 		juego.soltarFicha(1);
 		juego.soltarFicha(2);
-		juego.soltarFicha(3);
-		juego.soltarFicha(2);
+		juego.soltarFicha(1);
 		
-		assertEquals(1, juego.obtenerGanadasDel1());
-		assertEquals(2, juego.obtenerGanadasDel2());
+		assertEquals(2, juego.obtenerGanadasDel1());
+		assertEquals(1, juego.obtenerGanadasDel2());
 		assertEquals(true, juego.obtenerGanadorFinal());
 	}
 	
